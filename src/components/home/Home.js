@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ApiRequest from '../../utils/ApiRequest';
 import Container from '@material-ui/core/Container';
 import HomeAppBar from '../components/surfaces/HomeAppBar';
-import HomeCard from '../components/surfaces/HomeCard';
+import HomePokemonCard from '../components/surfaces/HomePokemonCard';
 import CircProgress from '../components/feedback/CircProgress';
 import FilterDialog from '../components/feedback/FilterDialog';
 
@@ -59,16 +59,16 @@ class Home extends Component{
         })
       };
 
-    handleShowDetail = (name) =>{
+    handleShowDetail = (id) =>{
         this.props.history.push({
-            pathname: "/pokemon_detail/"+name,
+            pathname: "/pokemon_detail/"+id,
         })
     }
 
     componentDidMount(){
 
         let arrUrl = [
-            {url: ApiRequest.getBaseApiUrl() + "/pokemon?limit=1000"},
+            {url: ApiRequest.getBaseApiUrl() + "/pokemon?limit=20"},
             {url : ApiRequest.getBaseApiUrl() + "/type"},
         ]
 
@@ -132,7 +132,7 @@ class Home extends Component{
                 {
                     filterPokemon.map(function(item, i){
                        return(
-                            <HomeCard key={i} card={item} action={this.handleShowDetail} />
+                            <HomePokemonCard key={i} card={item} action={this.handleShowDetail} />
                        )
                     }.bind(this))
                 }

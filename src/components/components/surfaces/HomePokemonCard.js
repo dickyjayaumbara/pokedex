@@ -5,18 +5,18 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { CardMedia } from '@material-ui/core';
 
-class HomeCard extends Component{
+class HomePokemonCard extends Component{
     
     constructor(props){
         super(props);
 
         this.state = {
-            card : this.props.card  
+            card : this.props.card
         }
     }
 
-    handleShowDetail = (name) => {
-        this.props.action(name);
+    handleShowDetail = (id) => {
+        this.props.action(id);
     }
 
     componentDidUpdate(prevProps, prevState){
@@ -29,11 +29,11 @@ class HomeCard extends Component{
 
 
     render(){
-        const { card } = this.state
+        const { card } = this.state;
 
         return(
             <Card style={styles.card}>
-                <CardActionArea onClick={() => this.handleShowDetail(card.name)}>
+                <CardActionArea onClick={() => this.handleShowDetail(card.id)}>
                     <CardContent style={styles.content}>
 
                         <div style={styles.bxInfo}>
@@ -65,7 +65,7 @@ class HomeCard extends Component{
     }
 }
     
-export default HomeCard;
+export default HomePokemonCard;
 
 const styles = {
     card : {
