@@ -3,7 +3,7 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import { CardMedia, Paper } from '@material-ui/core';
+import { CardMedia } from '@material-ui/core';
 
 class HomeCard extends Component{
     
@@ -19,6 +19,15 @@ class HomeCard extends Component{
         this.props.action(name);
     }
 
+    componentDidUpdate(prevProps, prevState){
+        if(prevProps.card !== this.props.card){
+            this.setState({
+                card : this.props.card,
+            })
+        }
+    }
+
+
     render(){
         const { card } = this.state
 
@@ -27,14 +36,26 @@ class HomeCard extends Component{
                 <CardActionArea onClick={() => this.handleShowDetail(card.name)}>
                     <CardContent style={styles.content}>
 
-                        <Typography style={styles.bxInfo}>
-                            <Typography>#{card.id}</Typography>
-                            <Typography style={styles.name}>{card.name}</Typography>
-                        </Typography>
+                        <div style={styles.bxInfo}>
+                            <div style={styles.bxtext}>
+                                <Typography>#{card.id}</Typography>
+                                <Typography style={styles.name}>{card.name}</Typography>
+                            </div>
+                            
+                            <div style={styles.bxType}>
+                                {
+                                    card.types.map(function(item, i){
+                                        return(
+                                            <span key={i} style={styles.labelType}>{item.type.name}</span>
+                                        )
+                                     })
+                                }
+                            </div>
+                        </div>
                         
                         <CardMedia
                             style={styles.media}
-                            image={card.sprites.front_default}
+                            image={card.img}
                             title={card.name}
                         />
                     </CardContent>
@@ -60,10 +81,40 @@ const styles = {
 
     bxInfo :{
         display: "flex",
+        flexDirection: "column",
+        flex: 1,
+        marginRight: "10px"
+    },
+
+    bxtext :{
+        display: "flex",
+        flexDirection: "row",
+        marginBottom: "10px"
+    },
+
+    bxType: {
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        flex: 1
+    },
+
+    labelType: {
+        display: "flex",
+        flex: 1,
+        padding: "5px",
+        marginRight: "5px",
+        textTransform: "capitalize",
+        textAlign: "center",
+        alignItems: "center",
+        justifyContent: "center",
+        border: "solid 2px black"
     },
 
     name :{
-        marginLeft : "15px"
+        marginLeft : "15px",
+        textTransform: "capitalize"
     },
 
     media :{

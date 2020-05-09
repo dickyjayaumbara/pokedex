@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import './Cont404.css';
 
 class Cont404 extends Component{
     render(){

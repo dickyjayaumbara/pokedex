@@ -4,6 +4,10 @@ const baseUrl = "https://pokeapi.co";
 const baseApiUrl = baseUrl + "/api/v2";
 
 export default class ApiRequest{
+    static getBaseApiUrl = () =>{
+        return baseApiUrl;
+    }
+
     static get = (url, callback) => {
         let headers = {
             'Access-Control-Allow-Origin': '*',
@@ -41,21 +45,6 @@ export default class ApiRequest{
         )
         .catch(errors => {
                 callback(errors.response);
-        });
-    }
-
-    static post = (url, formData, callback) => {
-        let headers = {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        }
-
-        axios.post(baseApiUrl + url, formData, headers)
-        .then(function (response) {
-            callback(response);
-        })
-        .catch(function (error) {
-            callback(error.response);
         });
     }
 }

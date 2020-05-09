@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import './PokemonDetail.css';
 import { Container, Typography } from '@material-ui/core';
 import DetailAppBar from '../components/surfaces/DetailAppBar';
 import CircProgress from '../components/feedback/CircProgress';
