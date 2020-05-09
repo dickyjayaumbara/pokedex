@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { CardMedia } from '@material-ui/core';
@@ -13,6 +11,10 @@ class DetailPokemonCard extends Component{
         this.state = {
             card : this.props.card
         }
+    }
+
+    handleOpenImagePopUp = () => {
+        this.props.action();
     }
 
     componentDidUpdate(prevProps, prevState){
@@ -28,16 +30,25 @@ class DetailPokemonCard extends Component{
         const { card } = this.state;
         
         return(
-            <CardContent style={styles.content}>
-                <div style={styles.bxtext}>
-                    <Typography>#{card.id}</Typography>
-                    <Typography style={styles.name}>{card.name}</Typography>
+            <CardContent style={styles.content} onClick={() => this.handleOpenImagePopUp()}>
+                <div style={styles.bxInfo}>
+                    <div style={styles.bxtext}>
+                        <Typography>#{card.id}</Typography>
+                        <Typography style={styles.name}>{card.name}</Typography>
+                    </div>
+                    
+                    <div style={styles.bxOther}>
+                        <Typography>Base Experience : {card.baseExperience}</Typography>
+                        <Typography>Weight : {card.weight}</Typography>
+                        <Typography style={{fontSize: "10px", marginTop: "10px"}}>*Click me! to see the image!</Typography>
+                    </div>
                 </div>
                 
                 {card.img !== "" && <CardMedia
                     style={styles.media}
                     image={card.img}
                     title={card.name}
+                    
                 />}
             </CardContent>
         )

@@ -68,7 +68,7 @@ class Home extends Component{
     componentDidMount(){
 
         let arrUrl = [
-            {url: ApiRequest.getBaseApiUrl() + "/pokemon?limit=20"},
+            {url: ApiRequest.getBaseApiUrl() + "/pokemon?limit=1000"},
             {url : ApiRequest.getBaseApiUrl() + "/type"},
         ]
 
@@ -113,14 +113,14 @@ class Home extends Component{
                     listType: instance.listType
                 })
 
-            }.bind(instance));
+            });
         }.bind(this))
 
         
     }
 
     render(){
-        const { loading, filterDialog, listPokemon, filterPokemon,  listType, filterType } = this.state;
+        const { loading, filterDialog, filterPokemon,  listType, filterType } = this.state;
 
         return(
             <Container>

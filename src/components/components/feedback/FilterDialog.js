@@ -47,7 +47,7 @@ class FilterDialog extends Component{
             <Dialog fullScreen aria-labelledby="simple-dialog-title" open={open}>
                 <AppBar position="sticky">
                     <Toolbar>
-                        <IconButton edge="start" color="inherit" onClick={() => this.handleClose()} aria-label="close">
+                        <IconButton edge="start" color="inherit" onClick={() => this.handleClose("all")} aria-label="close">
                         <CloseIcon />
                         </IconButton>
                         <Typography variant="h6" >

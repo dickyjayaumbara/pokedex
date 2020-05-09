@@ -8,6 +8,20 @@ export default class ApiRequest{
         return baseApiUrl;
     }
 
+    static getFullUrl = (url, callback) => {
+        let headers = {
+            'Access-Control-Allow-Origin': '*',
+        }
+
+        axios.get(url, headers)
+        .then(function (response) {
+            callback(response);
+        })
+        .catch(function (error) {
+            callback(error.response);
+        });
+    }
+
     static get = (url, callback) => {
         let headers = {
             'Access-Control-Allow-Origin': '*',
