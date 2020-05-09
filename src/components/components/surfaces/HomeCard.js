@@ -14,12 +14,16 @@ class HomeCard extends Component{
         }
     }
 
+    handleShowDetail = (name) => {
+        this.props.action(name);
+    }
+
     render(){
         const { card } = this.state
 
         return(
             <Card style={styles.card}>
-                <CardActionArea>
+                <CardActionArea onClick={() => this.handleShowDetail(card.name)}>
                     <CardContent>
                         <Typography>{card.name}</Typography>
                     </CardContent>

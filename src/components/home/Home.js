@@ -17,12 +17,14 @@ class Home extends Component{
         }
     }
 
-    handleChangeScreen = (pathName) => {
-        this.props.history.push(pathName + "/dummyID")
+    handleShowDetail = (name) =>{
+        this.props.history.push({
+            pathname: "/pokemon_detail/"+name,
+        })
     }
 
     componentDidMount(){
-        ApiRequest.get("/pokemon?limit=1000", function(response){
+        ApiRequest.get("/pokemon?limit=10", function(response){
             this.setState({
             loading: false,
                listCard : response.data.results
@@ -42,9 +44,9 @@ class Home extends Component{
                 {
                     listCard.map(function(item, i){
                        return(
-                            <HomeCard key={i} card={item} />
+                            <HomeCard key={i} card={item} action={this.handleShowDetail} />
                        )
-                    })
+                    }.bind(this))
                 }
             </Container>
         )
