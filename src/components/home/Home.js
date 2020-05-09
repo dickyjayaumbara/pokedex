@@ -24,13 +24,42 @@ class Home extends Component{
     }
 
     componentDidMount(){
-        ApiRequest.get("/pokemon?limit=10", function(response){
-            this.setState({
-            loading: false,
-               listCard : response.data.results
-            })
+        ApiRequest.get("/pokemon?limit=20", function(response){
+            let instance = this;
+            
+            let arrUrl = [];
+            let i = 0;
+
+            while(i < response.data.results.length){
+                let url = response.data.results[i];
+                arrUrl = [...arrUrl, url]
+                i++;
+            }
+
+
+            ApiRequest.getAll(arrUrl, function(response){
+                
+                let newListCard = [...instance.state.listCard];
+
+                let i=0;
+                while(i<response.length){
+                    let data = response[i].data
+                    newListCard = [...newListCard, data];
+                    i++;
+                }
+
+                instance.setState({
+                loading: false,
+                   listCard : newListCard
+                })
+
+            }.bind(instance));
+
+            
         }.bind(this))
     }
+
+    //https://pokeapi.co/api/v2/pokemon/1/
 
     render(){
         const { loading, listCard } = this.state;
