@@ -1,16 +1,21 @@
 import React from 'react';
 import './App.css';
 
+import { BrowserRouter, Switch, Route  } from 'react-router-dom'
+import Home from './components/home/Home';
+import PokemonDetail from './components/pokemon_detail/PokemonDetail';
+import Cont404 from './components/cont_404/Cont404';
+
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src="/logo512.png" className="App-logo" alt="logo"/>
-        <p>
-         POKEDEX
-        </p>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/pokemon_detail/:id" exact component={PokemonDetail} />
+          <Route component={Cont404} />
+      </Switch>
+    </BrowserRouter>
+
   );
 }
 
